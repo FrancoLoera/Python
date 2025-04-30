@@ -1,0 +1,22 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Test",
+  "steps": [
+    {
+      "file": "login.py",
+      "description": "Importamos los 3 módulos fundamentales de PyQt. También importamos uic para la carga de interfaces producidas en PyQt",
+      "line": 1
+    },
+    {
+      "file": "login.py",
+      "description": "Cargamos otras librerías y módulos necesarios para el desarrollo del programa",
+      "line": 7
+    },
+    {
+      "file": "login.py",
+      "description": "Utilizamos un manejador de contexto para mantener la conexión a base de datos abierta durante todo el uso del programa.\r\nSe ejecutan cursores para la activación del PRAGMA y la creación de nuestras tablas. ",
+      "line": 13
+    }
+  ],
+  "ref": "main"
+}
