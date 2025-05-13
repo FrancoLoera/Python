@@ -6,14 +6,12 @@ from PyQt5 import uic
 
 # Importaciones de funcionalidad
 import sys, sqlite3
-from sqlite3 import Error
 import utilidades
 
 try:
-    with sqlite3.connect('login_db.db', detect_types = sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES) as conexion:
+    with sqlite3.connect("login_db.db", detect_types = sqlite3.PARSE_DECLTYPES | sqlite3.PARSE_COLNAMES) as conexion:
         cursor = conexion.cursor()
         cursor.execute("PRAGMA foreign_keys = ON;")
-        
         # TABLA USUARIO
         cursor.execute("""
                     CREATE TABLE IF NOT EXISTS USUARIO(
@@ -21,7 +19,9 @@ try:
                         nombreCompleto TEXT NOT NULL,
                         correoElectronico TEXT NOT NULL,
                         contrasena TEXT NOT NULL,
-                        CONSTRAINT PK_USUARIO PRIMARY KEY(idUsuario)
+                        CONSTRAINT PK_USUARIO PRIMARY KEY(idUsuario),
+                        CONSTRAINT UQ_nombreCompleto_USUARIO UNIQUE(nombreCompleto),
+                        CONSTRAINT UQ_correoElectronico_USUARIO UNIQUE(correoElectronico)
                         );
                     """)
         
@@ -29,12 +29,16 @@ try:
         cursor.execute("""
                     CREATE TABLE IF NOT EXISTS PROVEEDOR(
                         idProveedor INTEGER,
+                        nombre TEXT NOT NULL,
                         razonSocial TEXT NOT NULL,
                         rfc TEXT NOT NULL,
-                        correo TEXT NOT NULL,
+                        correoElectronico TEXT NOT NULL,
                         telefono TEXT NOT NULL,
                         idUsuario INTEGER,
                         CONSTRAINT PK_PROVEEDOR PRIMARY KEY(idProveedor),
+                        CONSTRAINT UQ_rfc_PROVEEDOR UNIQUE(rfc),
+                        CONSTRAINT UQ_correoElectronico_PROVEEDOR UNIQUE(correoElectronico),
+                        CONSTRAINT UQ_telefono_PROVEEDOR UNIQUE(telefono),
                         CONSTRAINT FK_idUsuario_USUARIO FOREIGN KEY(idUsuario) REFERENCES USUARIO(idUsuario) ON DELETE CASCADE
                         );
                     """)
@@ -49,6 +53,7 @@ try:
                         inventario INTEGER NOT NULL,
                         idProveedor INTEGER NOT NULL,
                         CONSTRAINT PK_PRODUCTO PRIMARY KEY(idProducto),
+                        CONSTRAINT UQ_nombre_PRODUCTO UNIQUE(nombre),
                         CONSTRAINT FK_idProveedor_PRODUCTO FOREIGN KEY(idProveedor) REFERENCES PROVEEDOR(idProveedor) ON DELETE CASCADE
                         );
                     """)
@@ -79,21 +84,21 @@ try:
                 input_Correo = self.lineEdit_2.text()
                 input_Password = self.lineEdit.text()
                 
-                cursor.execute("SELECT * FROM USUARIO WHERE correoElectronico = ? AND contrasena = ?", (input_Correo, input_Password))
-                resultado = cursor.fetchone()
+                cursor.execute("SELECT COUNT(*) FROM USUARIO WHERE correoElectronico = ? AND contrasena = ?", (input_Correo, input_Password))
+                resultado = cursor.fetchone()[0]
                 
                 utilidades.conexion_LineEdit_PushButton_all([self.lineEdit, self.lineEdit_2], self.pushButton)
+                
                 self.panel = Panel(self)
                 self.panel.show()
-                self.close()
+                self.close()  # Oculta la ventana de login
                 
-                """if resultado:
-                    conexion_LineEdit_PushButton_all([self.lineEdit, self.lineEdit_2], self.pushButton)
+                """ if resultado:
                     self.panel = Panel(self)
                     self.panel.show()
                     self.close()  # Oculta la ventana de login
                 else:
-                    QMessageBox.warning(self, "Error", "Correo o contraseña incorrectos")"""
+                    QMessageBox.warning(self, "Error", "Correo o contraseña incorrectos") """
 
         class Panel(QMainWindow):
             def __init__(self, ventana_Anterior):
@@ -112,6 +117,7 @@ try:
                 self.pushButton.clicked.connect(self.regresar)
                 self.toolButton_2.clicked.connect(self.panel_Usuario)
                 self.toolButton.clicked.connect(self.panel_Producto)
+                self.toolButton_3.clicked.connect(self.panel_Proveedor)
                 
             def regresar(self):
                 self.ventana_Anterior.show()  # Vuelve a mostrar la ventana de login
@@ -124,6 +130,11 @@ try:
                 
             def panel_Producto(self):
                 self.panel = PanelProducto(self)
+                self.panel.show()
+                self.close()
+                
+            def panel_Proveedor(self):
+                self.panel = PanelProveedor(self)
                 self.panel.show()
                 self.close()
                     
@@ -141,83 +152,52 @@ try:
                 
                 utilidades.centrar_ventana(self)
                 
+                # Bind para botón Regresar
                 self.pushButton.clicked.connect(self.regresar)
+                
+                # Bind para establecer Página 0
                 self.stackedWidget.setCurrentIndex(0)
                 
+                # Bind para evaluar botón Limpiar
                 utilidades.conexion_LineEdit_PushButton_any([self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4], self.pushButton_6)
+                
+                # Bind para evaluar botón Registrar
                 utilidades.conexion_LineEdit_PushButton_all([self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4], self.pushButton_7)
+                
+                # Bind para ejecutar botón Limpiar
                 utilidades.conexion_pushButton_borrado(self.pushButton_6, [self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4])
+                
+                # Bind para cambiar de Página
                 utilidades.conectar_pushButton_index(self, self.stackedWidget, [self.pushButton_5, self.pushButton_4, self.pushButton_3, self.pushButton_2], conexion)
                 
+                # Bind para Agregar usuario
                 self.pushButton_7.clicked.connect(lambda: utilidades.agregar_registro(self, self.label_7, [self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4], conexion))
                 
-                self.id_usuarios = []
-                # self.tableWidget_2.cellChanged.connect(self.actualizar_usuario)
+                # Bind para Actualizar usuario
+                self.tableWidget_2.cellChanged.connect(self.on_cell_changed)
+                self.editando = False
+                
                 self.tableWidget_3.itemSelectionChanged.connect(self.habilitar_boton)
                 self.pushButton_9.clicked.connect(self.borrar_usuario)
                 
                 cursor.execute("SELECT MAX(idUsuario) FROM USUARIO")
-                resultado = f"ID del Usuario: {cursor.fetchone()[0] + 1}"
+                max = cursor.fetchone()[0]
                 
-                self.label_7.setText(resultado)
+                if max:
+                    resultado = f"ID del Usuario: {max + 1}"
+                    self.label_7.setText(resultado)
                 
-            def agregar_usuario(self):
-                correo = self.lineEdit_2.text()
-                cursor.execute("SELECT COUNT(*) FROM USUARIO WHERE correoElectronico = ?", (correo, ))
-                resultado = cursor.fetchone()[0]
-                
-                if resultado:
-                    QMessageBox.warning(self, "Error", "Ya existe un usuario con este correo electrónico")
-                    
                 else:
-                    if utilidades.validacion_correo_widget(self, self.lineEdit_2):
-                        nombre_Usuario = self.lineEdit.text()
-                        contrasena = self.lineEdit_3.text()
-                        contrasena_repetida = self.lineEdit_4.text()
-                        
-                        if contrasena == contrasena_repetida:
-                            cursor.execute("INSERT INTO USUARIO(nombreCompleto, correoElectronico, contrasena) VALUES(?, ?, ?)",
-                                        (nombre_Usuario, correo, contrasena))
-                            conexion.commit()
-                            QMessageBox.information(self, "Éxito", "El usuario se ha registrado exitosamente", QMessageBox.Ok)
-                            
-                            cursor.execute("SELECT MAX(idUsuario) FROM USUARIO")
-                            resultado = f"ID del Usuario: {cursor.fetchone()[0] + 1}"
-                            
-                            self.label_7.setText(resultado)                    
-                            
-                            self.lineEdit.clear()
-                            self.lineEdit_2.clear()
-                            self.lineEdit_3.clear()
-                            self.lineEdit_4.clear()
-                        
-                        else:
-                            QMessageBox.warning(self, "Contrañenas Distintas", "Las contraseñas no coinciden.")
-                        
-            """ def actualizar_usuario(self, fila, columna):
-                id_usuario = self.id_usuarios[fila]
-                nuevo_valor = self.tableWidget_2.item(fila, columna).text()
-                columna_nombre = ["nombreCompleto", "correoElectronico", "contrasena"][columna]
-                
-                if nuevo_valor:
-                    if (columna_nombre == "correoElectronico") and (validacion_correo_texto(self, nuevo_valor)):
-                        cursor.execute(f"UPDATE USUARIO SET {columna_nombre} = ? WHERE idUsuario = ?", (nuevo_valor, id_usuario))
-                        conexion.commit()
-                        
-                    elif (columna_nombre == "correoElectronico"):
-                        self.cargar_datos_CUD(self.tableWidget_2)
-                        
-                    else:
-                        cursor.execute(f"UPDATE USUARIO SET {columna_nombre} = ? WHERE idUsuario = ?", (nuevo_valor, id_usuario))
-                        conexion.commit()
-                        
-                else:
-                    QMessageBox.warning(self, "Campo Vacío", "No puede dejar el campo vacío.")
-                    self.cargar_datos_CUD(self.tableWidget_2) """
+                    self.label_7.setText("ID del Usuario: 1")
                 
             def regresar(self):
                 self.ventana_Anterior.show()
                 self.close()
+                
+            def on_cell_changed(self, fila, columna):
+                if self.editando:
+                    return
+                utilidades.actualizar_registro(self, self.tableWidget_2, fila, columna, conexion)
                 
             def borrar_usuario(self):
                 filas_seleccionadas = self.tableWidget_3.selectionModel().selectedRows()
@@ -270,9 +250,14 @@ try:
                 self.pushButton.clicked.connect(self.regresar)
                 
                 cursor.execute("SELECT MAX(idProducto) FROM PRODUCTO")
-                resultado = f"ID del Producto: {cursor.fetchone()[0] + 1}"
+                max = cursor.fetchone()[0]
                 
-                self.label_11.setText(resultado)
+                if max:
+                    resultado = f"ID del Producto: {max + 1}"
+                    self.label_11.setText(resultado)
+                
+                else:
+                    self.label_11.setText("ID del Producto: 1")
                 
                 validator_int = QIntValidator()
                 validator_float = QDoubleValidator()
@@ -281,44 +266,97 @@ try:
                 self.lineEdit_4.setValidator(validator_int)
                 self.lineEdit_5.setValidator(validator_int)
                 
+                # Bind para establecer Página 0
                 self.stackedWidget.setCurrentIndex(0)
                 
+                # Bind para evaluar botón Limpiar
                 utilidades.conexion_LineEdit_PushButton_any([self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4, self.lineEdit_5], self.pushButton_10)
+                
+                # Bind para evaluar botón Registrar
                 utilidades.conexion_LineEdit_PushButton_all([self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4, self.lineEdit_5], self.pushButton_11)
+                
+                # Bind para ejecutar botón Limpiar
                 utilidades.conexion_pushButton_borrado(self.pushButton_10, [self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4, self.lineEdit_5])
+                
+                # Bind para cambiar de Página
                 utilidades.conectar_pushButton_index(self, self.stackedWidget, [self.pushButton_6, self.pushButton_7, self.pushButton_8, self.pushButton_9], conexion)
                 
-                self.pushButton_11.clicked.connect(self.agregar_producto)
+                # Bind para Agregar producto
+                self.pushButton_11.clicked.connect(lambda: utilidades.agregar_registro(self, self.label_11, [self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4, self.lineEdit_5], conexion))
+                
+                # Bind para Actualizar producto
+                self.tableWidget_2.cellChanged.connect(self.on_cell_changed)
+                self.editando = False
                 
             def regresar(self):
                 self.ventana_anterior.show()
                 self.close()
+            
+            def on_cell_changed(self, fila, columna):
+                if self.editando:
+                    return
+                utilidades.actualizar_registro(self, self.tableWidget_2, fila, columna, conexion)
                 
-            def agregar_producto(self):
-                nombre = self.lineEdit.text()
-                precio = int(self.lineEdit_3.text())
-                inventario = int(self.lineEdit_4.text())
-                proveedor = self.lineEdit_5.text()
+        class PanelProveedor(QMainWindow):
+            def __init__(self, ventana_Anterior):
+                super().__init__()
                 
-                cursor.execute("SELECT COUNT(*) FROM PRODUCTO WHERE nombre = ? AND idProveedor = ?", (nombre, proveedor))
+                self.ventana_Anterior = ventana_Anterior
                 
-                # Validación producto único
-                if cursor.fetchone():
-                    QMessageBox.warning(self, "Error", "Este producto ya ha sido registrado previamente.")
-                    
-                # Validación precio mayor a 0
-                elif precio <= 0:
-                    QMessageBox.warning(self, "Error", "El precio del producto no puede ser menor a 1.")
-                    
-                elif inventario <= 0:
-                    QMessageBox.warning(self, "Error", "El inventario del producto no puede ser menor a 1.")
-                    
+                uic.loadUi("panel_proveedor.ui", self)
+                
+                self.setWindowTitle("NeuralCore - Panel de Proveedores")
+                self.setWindowIcon(QIcon("favicon.png"))
+                self.setWindowOpacity(0.9)
+                
+                utilidades.centrar_ventana(self)
+                
+                # Bind para botón Regresar
+                self.pushButton_2.clicked.connect(self.regresar)
+                
+                cursor.execute("SELECT MAX(idProveedor) FROM PROVEEDOR")
+                max = cursor.fetchone()[0]
+                
+                if max:
+                    resultado = f"ID del Proveedor: {max + 1}"
+                    self.label_20.setText(resultado)
+                
                 else:
-                    if utilidades.consulta_agregar([self.lineEdit, self.lineEdit_2, self.lineEdit_3, self.lineEdit_4, self.lineEdit_5],
-                                    ["nombre", "descripcion", "precio", "inventario", "idProveedor"],
-                                    "PRODUCTO", conexion
-                                    ):
-                        QMessageBox.information(self, "Éxito", "El producto se ha registrado exitosamente.")
+                    self.label_20.setText("ID del Proveedor: 1")
+                
+                validator_int = QIntValidator()
+                self.lineEdit_8.setValidator(validator_int)
+                
+                # Bind para establecer Página 0
+                self.stackedWidget_2.setCurrentIndex(0)
+                
+                # Bind para evaluar botón Limpiar
+                utilidades.conexion_LineEdit_PushButton_any([self.radioButton, self.radioButton_2, self.lineEdit, self.lineEdit_6, self.lineEdit_7, self.lineEdit_8], self.pushButton_17)
+                
+                # Bind para evaluar botón Registrar
+                utilidades.conexion_LineEdit_PushButton_all([self.radioButton, self.radioButton_2, self.lineEdit, self.lineEdit_6, self.lineEdit_7, self.lineEdit_8], self.pushButton_18)
+                
+                # Bind para ejecutar botón Limpiar
+                utilidades.conexion_pushButton_borrado(self.pushButton_17, [self.radioButton, self.radioButton_2, self.lineEdit, self.lineEdit_6, self.lineEdit_7, self.lineEdit_8])
+                
+                # Bind para cambiar de Página
+                utilidades.conectar_pushButton_index(self, self.stackedWidget_2, [self.pushButton_13, self.pushButton_14, self.pushButton_15, self.pushButton_16], conexion)
+                
+                # Bind para Agregar proveedor
+                self.pushButton_18.clicked.connect(lambda: utilidades.agregar_registro(self, self.label_20, [self.lineEdit, self.radioButton, self.radioButton_2, self.lineEdit_6, self.lineEdit_7, self.lineEdit_8], conexion))
+                
+                # Bind para Actualizar producto
+                self.tableWidget_2.cellChanged.connect(self.on_cell_changed)
+                self.editando = False
+                
+            def regresar(self):
+                self.ventana_Anterior.show()
+                self.close()
+                
+            def on_cell_changed(self, fila, columna):
+                if self.editando:
+                    return
+                utilidades.actualizar_registro(self, self.tableWidget_2, fila, columna, conexion)
         
         if __name__ == "__main__": 
             app = QApplication(sys.argv)
@@ -328,7 +366,8 @@ try:
             
             sys.exit(app.exec_())
 
-except Error as e:
+except Exception:
+    excepcion = sys.exc_info()
     print(f"Se ha presentado un error con el manejador de bases de datos")
-    print(f"Tipo de error: {type(e)}")
-    print(f"Mensaje del error: {e}")
+    print(f"Tipo de error: {excepcion[0]}")
+    print(f"Mensaje del error: {excepcion[1]}")

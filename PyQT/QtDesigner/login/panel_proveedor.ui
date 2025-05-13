@@ -25,26 +25,14 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <property name="styleSheet">
-   <string notr="true">#centralwidget {
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">#centralwidget {
 background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, stop:0.393035 rgba(109, 4, 46, 255), stop:0.895522 rgba(59, 2, 25, 255));
 }</string>
-  </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="3,3,14">
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-    <item>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
      <widget class="QFrame" name="frame_2">
       <property name="styleSheet">
        <string notr="true">#frame_2 {
@@ -57,7 +45,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
        <property name="leftMargin">
         <number>50</number>
        </property>
@@ -71,7 +59,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
         <number>11</number>
        </property>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_2">
          <property name="minimumSize">
           <size>
            <width>80</width>
@@ -99,7 +87,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
         </widget>
        </item>
        <item>
-        <spacer name="horizontalSpacer">
+        <spacer name="horizontalSpacer_2">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -112,7 +100,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="pushButton_2">
          <property name="cursor">
           <cursorShape>PointingHandCursor</cursorShape>
          </property>
@@ -137,7 +125,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="1" column="0">
      <widget class="QFrame" name="frame">
       <property name="styleSheet">
        <string notr="true">#frame {
@@ -150,16 +138,16 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <property name="spacing">
         <number>20</number>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_11">
+        <layout class="QVBoxLayout" name="verticalLayout_20">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <layout class="QHBoxLayout" name="horizontalLayout_20">
            <item>
-            <widget class="QLabel" name="label_6">
+            <widget class="QLabel" name="label_15">
              <property name="minimumSize">
               <size>
                <width>40</width>
@@ -198,7 +186,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="QPushButton" name="pushButton_13">
            <property name="font">
             <font>
              <family>Zoho Puvi</family>
@@ -211,7 +199,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">#pushButton_6 {
+            <string notr="true">#pushButton_13 {
 	background-color: #f9f9f9;
 	color: #93063e;
 	padding: 15px 0px;
@@ -227,11 +215,11 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_12">
+        <layout class="QVBoxLayout" name="verticalLayout_21">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <layout class="QHBoxLayout" name="horizontalLayout_21">
            <item>
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="label_16">
              <property name="minimumSize">
               <size>
                <width>45</width>
@@ -258,7 +246,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="QPushButton" name="pushButton_14">
            <property name="font">
             <font>
              <family>Zoho Puvi</family>
@@ -271,7 +259,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">#pushButton_7 {
+            <string notr="true">#pushButton_14 {
 	background-color: #f9f9f9;
 	color: #93063e;
 	padding: 15px 0px;
@@ -287,11 +275,11 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_13">
+        <layout class="QVBoxLayout" name="verticalLayout_22">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <layout class="QHBoxLayout" name="horizontalLayout_22">
            <item>
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="label_17">
              <property name="minimumSize">
               <size>
                <width>40</width>
@@ -318,7 +306,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_8">
+          <widget class="QPushButton" name="pushButton_15">
            <property name="font">
             <font>
              <family>Zoho Puvi</family>
@@ -331,7 +319,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">#pushButton_8 {
+            <string notr="true">#pushButton_15 {
 	background-color: #f9f9f9;
 	color: #93063e;
 	padding: 15px 0px;
@@ -347,11 +335,11 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_14">
+        <layout class="QVBoxLayout" name="verticalLayout_23">
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <layout class="QHBoxLayout" name="horizontalLayout_23">
            <item>
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="label_18">
              <property name="minimumSize">
               <size>
                <width>40</width>
@@ -378,7 +366,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
           </layout>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_9">
+          <widget class="QPushButton" name="pushButton_16">
            <property name="font">
             <font>
              <family>Zoho Puvi</family>
@@ -391,7 +379,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
             <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="styleSheet">
-            <string notr="true">#pushButton_9 {
+            <string notr="true">#pushButton_16 {
 	background-color: #f9f9f9;
 	color: #93063e;
 	padding: 15px 0px;
@@ -409,7 +397,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
       </layout>
      </widget>
     </item>
-    <item>
+    <item row="2" column="0">
      <widget class="QFrame" name="frame_3">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -417,7 +405,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0">
+      <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0">
        <property name="leftMargin">
         <number>0</number>
        </property>
@@ -431,15 +419,15 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
         <number>0</number>
        </property>
        <item>
-        <widget class="QStackedWidget" name="stackedWidget">
+        <widget class="QStackedWidget" name="stackedWidget_2">
          <property name="currentIndex">
-          <number>2</number>
+          <number>3</number>
          </property>
-         <widget class="QWidget" name="page">
+         <widget class="QWidget" name="page_5">
           <property name="styleSheet">
            <string notr="true">background-color: transparent;</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
+          <layout class="QVBoxLayout" name="verticalLayout_8">
            <property name="leftMargin">
             <number>0</number>
            </property>
@@ -453,7 +441,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
             <number>0</number>
            </property>
            <item>
-            <widget class="QFrame" name="frame_4">
+            <widget class="QFrame" name="frame_15">
              <property name="styleSheet">
               <string notr="true">margin: 0px 60px;</string>
              </property>
@@ -463,18 +451,18 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_15" stretch="1,0,1">
+             <layout class="QVBoxLayout" name="verticalLayout_24" stretch="1,0,1">
               <item>
-               <widget class="QFrame" name="frame_8">
+               <widget class="QFrame" name="frame_16">
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_16">
+                <layout class="QVBoxLayout" name="verticalLayout_25">
                  <item>
-                  <widget class="QLabel" name="label_10">
+                  <widget class="QLabel" name="label_19">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -494,7 +482,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
                     <string notr="true">color: white</string>
                    </property>
                    <property name="text">
-                    <string>AGREGAR PRODUCTO</string>
+                    <string>AGREGAR PROVEEDOR</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -505,7 +493,7 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
                </widget>
               </item>
               <item>
-               <widget class="QFrame" name="frame_9">
+               <widget class="QFrame" name="frame_17">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -518,9 +506,9 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QVBoxLayout" name="verticalLayout_17">
+                <layout class="QVBoxLayout" name="verticalLayout_26">
                  <item>
-                  <widget class="QLabel" name="label_11">
+                  <widget class="QLabel" name="label_20">
                    <property name="font">
                     <font>
                      <family>Zoho Puvi</family>
@@ -534,8 +522,99 @@ background-color: qlineargradient(spread:pad, x1:0.234, y1:0, x2:0.811, y2:1, st
 margin-bottom: 20px;</string>
                    </property>
                    <property name="text">
-                    <string>ID de Producto:</string>
+                    <string>ID del Proveedor:</string>
                    </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QGroupBox" name="groupBox">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Zoho Puvi</family>
+                     <pointsize>12</pointsize>
+                     <weight>75</weight>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="layoutDirection">
+                    <enum>Qt::LeftToRight</enum>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QGroupBox {
+	color: white;
+	padding-top: 25px;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+	border: 1px solid white;
+	border-radius: 10px;
+}
+
+QRadioButton {
+	color: white;
+}</string>
+                   </property>
+                   <property name="title">
+                    <string>Razón Social</string>
+                   </property>
+                   <property name="flat">
+                    <bool>false</bool>
+                   </property>
+                   <layout class="QHBoxLayout" name="horizontalLayout">
+                    <item>
+                     <widget class="QRadioButton" name="radioButton_2">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                        <horstretch>1</horstretch>
+                        <verstretch>2</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Zoho Puvi</family>
+                        <pointsize>12</pointsize>
+                       </font>
+                      </property>
+                      <property name="layoutDirection">
+                       <enum>Qt::LeftToRight</enum>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">margin: 0px;
+padding-right: 50px;</string>
+                      </property>
+                      <property name="text">
+                       <string>Persona Física</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QRadioButton" name="radioButton">
+                      <property name="sizePolicy">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                       </sizepolicy>
+                      </property>
+                      <property name="font">
+                       <font>
+                        <family>Zoho Puvi</family>
+                        <pointsize>12</pointsize>
+                       </font>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">margin: 0px;</string>
+                      </property>
+                      <property name="text">
+                       <string>Persona Moral</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
                   </widget>
                  </item>
                  <item>
@@ -566,7 +645,7 @@ margin-bottom: 20px;</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_2">
+                  <widget class="QLineEdit" name="lineEdit_6">
                    <property name="font">
                     <font>
                      <family>Zoho Puvi</family>
@@ -574,7 +653,7 @@ margin-bottom: 20px;</string>
                     </font>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">#lineEdit_2 {
+                    <string notr="true">#lineEdit_6 {
 	background-color: rgba(0, 0, 0, 0);
 	color: white;
 	border: none;
@@ -583,17 +662,17 @@ margin-bottom: 20px;</string>
 	margin-bottom: 20px;
 }
 
-#lineEdit::placeholder_2 {
+#lineEdit_6::placeholder {
 	color: gray;
 }</string>
                    </property>
                    <property name="placeholderText">
-                    <string>Descripción</string>
+                    <string>RFC</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_3">
+                  <widget class="QLineEdit" name="lineEdit_7">
                    <property name="font">
                     <font>
                      <family>Zoho Puvi</family>
@@ -601,7 +680,7 @@ margin-bottom: 20px;</string>
                     </font>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">#lineEdit_3 {
+                    <string notr="true">#lineEdit_7 {
 	background-color: rgba(0, 0, 0, 0);
 	color: white;
 	border: none;
@@ -610,7 +689,7 @@ margin-bottom: 20px;</string>
 	margin-bottom: 20px;
 }
 
-#lineEdit_3::placeholder {
+#lineEdit_7::placeholder_2 {
 	color: gray;
 }</string>
                    </property>
@@ -618,12 +697,12 @@ margin-bottom: 20px;</string>
                     <set>Qt::ImhNone</set>
                    </property>
                    <property name="placeholderText">
-                    <string>Precio</string>
+                    <string>Correo Electrónico</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_4">
+                  <widget class="QLineEdit" name="lineEdit_8">
                    <property name="font">
                     <font>
                      <family>Zoho Puvi</family>
@@ -631,7 +710,7 @@ margin-bottom: 20px;</string>
                     </font>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">#lineEdit_4 {
+                    <string notr="true">#lineEdit_8 {
 	background-color: rgba(0, 0, 0, 0);
 	color: white;
 	border: none;
@@ -640,38 +719,15 @@ margin-bottom: 20px;</string>
 	margin-bottom: 20px;
 }
 
-#lineEdit_4::placeholder {
+#lineEdit_8::placeholder {
 	color: gray;
 }</string>
                    </property>
-                   <property name="placeholderText">
-                    <string>Inventario</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEdit_5">
-                   <property name="font">
-                    <font>
-                     <family>Zoho Puvi</family>
-                     <pointsize>12</pointsize>
-                    </font>
-                   </property>
-                   <property name="styleSheet">
-                    <string notr="true">#lineEdit_5 {
-	background-color: rgba(0, 0, 0, 0);
-	color: white;
-	border: none;
-	border-bottom: 2px solid white;
-	letter-spacing: 1.5px;
-}
-
-#lineEdit_5::placeholder {
-	color: gray;
-}</string>
+                   <property name="inputMethodHints">
+                    <set>Qt::ImhNone</set>
                    </property>
                    <property name="placeholderText">
-                    <string>ID del Proveedor</string>
+                    <string>Teléfono</string>
                    </property>
                   </widget>
                  </item>
@@ -679,16 +735,16 @@ margin-bottom: 20px;</string>
                </widget>
               </item>
               <item>
-               <widget class="QFrame" name="frame_10">
+               <widget class="QFrame" name="frame_18">
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_12">
+                <layout class="QHBoxLayout" name="horizontalLayout_24">
                  <item>
-                  <widget class="QPushButton" name="pushButton_10">
+                  <widget class="QPushButton" name="pushButton_17">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -704,7 +760,7 @@ margin-bottom: 20px;</string>
                     <cursorShape>PointingHandCursor</cursorShape>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">#pushButton_10 {
+                    <string notr="true">#pushButton_17 {
 	background-color: rgb(144, 144, 144);
 	color: white;
 	padding: 15px 50px;
@@ -714,12 +770,12 @@ margin-bottom: 20px;</string>
 	border-radius: 25px;
 }
 
-#pushButton_10:enabled {
+#pushButton_17:enabled {
     background-color: rgb(144, 144, 144);
     color: white;
 }
 
-#pushButton_10:disabled {
+#pushButton_17:disabled {
     background-color: rgba(144, 144, 144, 50);
     color: darkgray;
 }</string>
@@ -730,7 +786,7 @@ margin-bottom: 20px;</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_11">
+                  <widget class="QPushButton" name="pushButton_18">
                    <property name="enabled">
                     <bool>false</bool>
                    </property>
@@ -746,7 +802,7 @@ margin-bottom: 20px;</string>
                     <cursorShape>PointingHandCursor</cursorShape>
                    </property>
                    <property name="styleSheet">
-                    <string notr="true">#pushButton_11 {
+                    <string notr="true">#pushButton_18 {
 	background-color: rgb(189, 7, 80);
 	color: white;
 	padding: 15px 50px;	margin: 0px;
@@ -755,12 +811,12 @@ margin-bottom: 20px;</string>
 	border-radius: 25px;
 }
 
-#pushButton_11::enabled {
+#pushButton_18::enabled {
 	background-color: rgb(189, 7, 80);
 	color: white;
 }
 
-#pushButton_11::disabled {
+#pushButton_18::disabled {
 	background-color: rgba(189, 7, 80, 50);
 	color: darkgray;
 }</string>
@@ -778,15 +834,15 @@ margin-bottom: 20px;</string>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="page_3">
+         <widget class="QWidget" name="page_6">
           <property name="styleSheet">
            <string notr="true">background-color: transparent;</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_4" stretch="1,7">
+          <layout class="QVBoxLayout" name="verticalLayout_9" stretch="1,7">
            <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <layout class="QHBoxLayout" name="horizontalLayout_25">
              <item>
-              <widget class="QLabel" name="label_12">
+              <widget class="QLabel" name="label_21">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -806,7 +862,7 @@ margin-bottom: 20px;</string>
                 <string notr="true">color: white;</string>
                </property>
                <property name="text">
-                <string>CONSULTAR PRODUCTOS</string>
+                <string>CONSULTAR PROVEEDORES</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -816,7 +872,7 @@ margin-bottom: 20px;</string>
             </layout>
            </item>
            <item>
-            <widget class="QFrame" name="frame_5">
+            <widget class="QFrame" name="frame_19">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -829,7 +885,7 @@ margin-bottom: 20px;</string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_14">
+             <layout class="QHBoxLayout" name="horizontalLayout_26">
               <item>
                <widget class="QTableWidget" name="tableWidget">
                 <property name="sizePolicy">
@@ -868,7 +924,7 @@ margin-bottom: 20px;</string>
                  <number>170</number>
                 </attribute>
                 <attribute name="horizontalHeaderStretchLastSection">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </attribute>
                 <attribute name="verticalHeaderStretchLastSection">
                  <bool>false</bool>
@@ -880,31 +936,31 @@ margin-bottom: 20px;</string>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="page_4">
+         <widget class="QWidget" name="page_7">
           <property name="styleSheet">
            <string notr="true">background-color: transparent;</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_6" stretch="1,7">
+          <layout class="QVBoxLayout" name="verticalLayout_10" stretch="1,7">
            <item>
-            <widget class="QFrame" name="frame_6">
+            <widget class="QFrame" name="frame_20">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_18">
+             <layout class="QVBoxLayout" name="verticalLayout_27">
               <item>
-               <widget class="QFrame" name="frame_11">
+               <widget class="QFrame" name="frame_21">
                 <property name="frameShape">
                  <enum>QFrame::StyledPanel</enum>
                 </property>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                <layout class="QHBoxLayout" name="horizontalLayout_27">
                  <item>
-                  <widget class="QLabel" name="label_13">
+                  <widget class="QLabel" name="label_22">
                    <property name="font">
                     <font>
                      <family>Zoho Puvi</family>
@@ -918,7 +974,7 @@ margin-bottom: 20px;</string>
                     <string notr="true">color: white;</string>
                    </property>
                    <property name="text">
-                    <string>ACTUALIZAR PRODUCTOS</string>
+                    <string>ACTUALIZAR PROVEEDORES</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>
@@ -932,14 +988,14 @@ margin-bottom: 20px;</string>
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="frame_12">
+            <widget class="QFrame" name="frame_22">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_16">
+             <layout class="QHBoxLayout" name="horizontalLayout_28">
               <item>
                <widget class="QTableWidget" name="tableWidget_2">
                 <property name="styleSheet">
@@ -971,7 +1027,7 @@ margin-bottom: 20px;</string>
                  <number>250</number>
                 </attribute>
                 <attribute name="horizontalHeaderStretchLastSection">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </attribute>
                </widget>
               </item>
@@ -980,24 +1036,24 @@ margin-bottom: 20px;</string>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="page_2">
+         <widget class="QWidget" name="page_8">
           <property name="styleSheet">
            <string notr="true">background-color: transparent;</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,6,1">
+          <layout class="QVBoxLayout" name="verticalLayout_28" stretch="1,6,1">
            <item>
-            <widget class="QFrame" name="frame_13">
+            <widget class="QFrame" name="frame_23">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QVBoxLayout" name="verticalLayout_19">
+             <layout class="QVBoxLayout" name="verticalLayout_29">
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <layout class="QHBoxLayout" name="horizontalLayout_29">
                 <item>
-                 <widget class="QLabel" name="label_14">
+                 <widget class="QLabel" name="label_23">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1017,7 +1073,7 @@ margin-bottom: 20px;</string>
                    <string notr="true">color: white;</string>
                   </property>
                   <property name="text">
-                   <string>BORRAR PRODUCTOS</string>
+                   <string>BORRAR PROVEEDORES</string>
                   </property>
                  </widget>
                 </item>
@@ -1027,14 +1083,14 @@ margin-bottom: 20px;</string>
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="frame_7">
+            <widget class="QFrame" name="frame_24">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_18">
+             <layout class="QHBoxLayout" name="horizontalLayout_30">
               <item>
                <widget class="QTableWidget" name="tableWidget_3">
                 <property name="styleSheet">
@@ -1042,7 +1098,7 @@ margin-bottom: 20px;</string>
 	background-color: #f9f9f9;
 }
 
-#tableWidget_2::item:selected:focus {
+#tableWidget_3::item:selected:focus {
     background-color: #25A7FF;
     color: #0A3557;
 }
@@ -1069,7 +1125,7 @@ margin-bottom: 20px;</string>
                  <number>250</number>
                 </attribute>
                 <attribute name="horizontalHeaderStretchLastSection">
-                 <bool>false</bool>
+                 <bool>true</bool>
                 </attribute>
                </widget>
               </item>
@@ -1077,19 +1133,19 @@ margin-bottom: 20px;</string>
             </widget>
            </item>
            <item>
-            <widget class="QFrame" name="frame_14">
+            <widget class="QFrame" name="frame_25">
              <property name="frameShape">
               <enum>QFrame::StyledPanel</enum>
              </property>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_19">
+             <layout class="QHBoxLayout" name="horizontalLayout_31">
               <property name="topMargin">
                <number>0</number>
               </property>
               <item>
-               <widget class="QPushButton" name="pushButton_12">
+               <widget class="QPushButton" name="pushButton_19">
                 <property name="enabled">
                  <bool>false</bool>
                 </property>
@@ -1111,7 +1167,7 @@ margin-bottom: 20px;</string>
                  <cursorShape>PointingHandCursor</cursorShape>
                 </property>
                 <property name="styleSheet">
-                 <string notr="true">#pushButton_12 {
+                 <string notr="true">#pushButton_19 {
 	background-color: rgb(189, 7, 80);
 	color: white;
 	padding: 15px 50px;
@@ -1121,12 +1177,12 @@ margin-bottom: 20px;</string>
 	min-width: 120px;
 }
 
-#pushButton_12::enabled {
+#pushButton_19::enabled {
 	background-color: rgb(189, 7, 80);
 	color: white;
 }
 
-#pushButton_12::disabled {
+#pushButton_19::disabled {
 	background-color: rgba(189, 7, 80, 50);
 	color: darkgray;
 }</string>
